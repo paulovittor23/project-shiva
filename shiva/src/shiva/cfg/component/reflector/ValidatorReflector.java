@@ -3,6 +3,14 @@ package shiva.cfg.component.reflector;
 import java.io.File;
 import java.util.List;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 @SuppressWarnings("unchecked")
 public interface ValidatorReflector {
 	

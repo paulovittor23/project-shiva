@@ -1,0 +1,15 @@
+log4j.rootLogger=INFO, stdout
+
+#log4j.appender.fileAppender=org.apache.log4j.FileAppender
+#log4j.appender.fileAppender.File=output.log
+#log4j.appender.fileAppender.layout=org.apache.log4j.PatternLayout
+#log4j.appender.fileAppender.layout.ConversionPattern=%2d{dd/MM/yyyy HH:mm} %5p [%t] (%F:%L) - %m%n
+#log4j.appender.fileAppender.Append=false
+
+#### Escreve no console
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+
+log4j.logger.org.apache.log4j.PropertyConfigurator=ERROR
+log4j.logger.org.apache.log4j.config.PropertySetter=ERROR
+log4j.logger.org.apache.log4j.FileAppender=ERROR

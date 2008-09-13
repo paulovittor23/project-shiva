@@ -12,6 +12,14 @@ import shiva.cfg.component.mapper.model.metadata.EntityMapping;
 import shiva.session.component.persister.model.Delete;
 import shiva.session.component.persister.model.Insert;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 public class EntityPersisterImpl implements EntityPersister {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
@@ -79,8 +87,6 @@ public class EntityPersisterImpl implements EntityPersister {
 		
 		// objectClass
 		delete.setObjectClasses( em.getObjectClass() );
-		
-		
 		
 		return delete.toStatementString();
 	}

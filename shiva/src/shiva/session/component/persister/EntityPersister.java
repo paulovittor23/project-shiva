@@ -2,11 +2,20 @@ package shiva.session.component.persister;
 
 import shiva.cfg.component.mapper.model.metadata.EntityMapping;
 
-@SuppressWarnings("unchecked")
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
+@SuppressWarnings({"unchecked", "unused"})
 public interface EntityPersister {
 	
 	/**
 	 * 
+	 * @param em
 	 * @param ldapEntity
 	 * @return
 	 */
@@ -14,6 +23,7 @@ public interface EntityPersister {
 	
 	/**
 	 * 
+	 * @param em
 	 * @param ldapEntity
 	 * @return
 	 */
@@ -21,6 +31,7 @@ public interface EntityPersister {
 	
 	/**
 	 * 
+	 * @param em
 	 * @param ldapEntity
 	 * @return
 	 */

@@ -1,10 +1,19 @@
 package shiva.cfg.model.exception;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 public class LdapSessionException extends Exception {
 	
 	private static final long serialVersionUID = -613343445747683121L;
 
 	/**
+	 * 
 	 * 
 	 * 
 	 */
@@ -13,6 +22,7 @@ public class LdapSessionException extends Exception {
     }
 	
 	/**
+	 * 
 	 * 
 	 * @param mensagem
 	 */

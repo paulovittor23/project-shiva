@@ -4,6 +4,15 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ * @param <E>
+ */
 public class Registrator<E> implements Registrable<E> {
 
 	private Set<E> registeredObjects;

@@ -2,6 +2,14 @@ package shiva.cfg.component.mapper.model.exception;
 
 import shiva.cfg.component.mapper.model.LdapEntity;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 @SuppressWarnings("unchecked")
 public class EntityAnnotationNotFoundException extends Exception {
 

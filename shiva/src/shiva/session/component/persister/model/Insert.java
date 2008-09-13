@@ -5,6 +5,14 @@ import java.util.Map;
 
 import org.apache.commons.collections.SequencedHashMap;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 @SuppressWarnings("unchecked")
 public class Insert {
 
@@ -13,8 +21,17 @@ public class Insert {
 	private String[] objectClasses;
 	private Map columns = new SequencedHashMap();
 
+	/**
+	 * 
+	 * 
+	 */
 	public Insert() {}
 	
+	/**
+	 * 
+	 * 
+	 * @param directoryName
+	 */
 	public Insert(String directoryName) {
 		this.directoryName = directoryName;
 	}

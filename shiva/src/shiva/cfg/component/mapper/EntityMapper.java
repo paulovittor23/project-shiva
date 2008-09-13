@@ -17,15 +17,22 @@ import shiva.cfg.component.mapper.model.metadata.AttributeMapping;
 import shiva.cfg.component.mapper.model.metadata.EntityMapping;
 import shiva.cfg.component.reflector.EntityReflectorImpl;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ * 
+ */
 @SuppressWarnings( "unchecked" )
 public class EntityMapper implements Mapper {
 
 	private Logger logger = Logger.getLogger( this.getClass() );
 
+	//
 	private Map<Class, EntityMapping> mappings = null;
-
 	private EntityReflectorImpl entityReflector = null;
-
 	private StringBuffer mappingErrors = null;
 
 	/**
@@ -41,8 +48,7 @@ public class EntityMapper implements Mapper {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see jldap.core.config.components.mapper.Mapper#initMapper()
+	 * @see shiva.cfg.component.mapper.Mapper#initMapper()
 	 */
 	public void initMapper() {
 		this.mappings.clear();
@@ -51,8 +57,7 @@ public class EntityMapper implements Mapper {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see jldap.core.config.mapping.interfaces.Mapper#generateMappings()
+	 * @see shiva.cfg.component.mapper.Mapper#generateMapping(java.util.Set)
 	 */
 	public Map<Class, EntityMapping> generateMapping( Set<Class> registeredClasses ) {
 
@@ -81,6 +86,7 @@ public class EntityMapper implements Mapper {
 	 * @param clazz
 	 * @return
 	 * @throws EntityAnnotationNotFoundException
+	 * @throws UidAttributeNotFoundException
 	 */
 	private EntityMapping mapClass( Class clazz ) throws EntityAnnotationNotFoundException,
 			UidAttributeNotFoundException {
@@ -128,7 +134,6 @@ public class EntityMapper implements Mapper {
 
 	/**
 	 * 
-	 * @param clazz
 	 * @param attribute
 	 * @return
 	 * @throws ColumnAnnotationNotFoundException

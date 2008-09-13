@@ -9,6 +9,14 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 @SuppressWarnings("unchecked")
 public class ValidatorReflectorImpl implements ValidatorReflector {
 

@@ -22,13 +22,23 @@ import shiva.util.Utils;
 import shiva.util.model.exception.PropertyValueNotFound;
 import static shiva.util.model.PropertiesType.*;
 
-@SuppressWarnings({"unchecked","unused"})
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
+@SuppressWarnings({"unchecked"})
 public class Configuration {
 	
 	Logger logger = Logger.getLogger(this.getClass());
 	
+	// singleton instance
 	private static Configuration instance = null;
 	
+	// 
 	private static final String VALIDATION_CLASSES_PACKAGE = "validation.class.package";
 	private static final String LDAP_SERVER = "ldap.server";
 	private static final String LDAP_SERVER_PORT = "ldap.server.port";
@@ -36,13 +46,16 @@ public class Configuration {
 	private static final String LDAP_SERVER_USERNAME = "ldap.server.username";
 	private static final String LDAP_SERVER_PASSWORD = "ldap.server.password";
 	
+	//
 	private Mapper entityMapper;
 	private Registrator<Class> entityRegistrator;
 	private Registrator<Class> validationRegistrator;
 	private ValidatorReflector validatorReflector;
 
+	// 
 	private Map<Class, EntityMapping> entityMappings;
 	
+	//
 	private String ldapServerHost;
 	private String ldapServerPort;
 	private String ldapServerBaseDn;
@@ -61,6 +74,7 @@ public class Configuration {
 	
 	/**
 	 * 
+	 * 
 	 * @return
 	 */
 	public static synchronized Configuration getInstance(){
@@ -71,6 +85,7 @@ public class Configuration {
 	}
 	
 	/**
+	 * 
 	 * 
 	 * 
 	 */
@@ -86,6 +101,7 @@ public class Configuration {
 	}
 	
 	/**
+	 * 
 	 * 
 	 * 
 	 */
@@ -117,8 +133,8 @@ public class Configuration {
 		}
 	}
 	
-	
 	/**
+	 * 
 	 * 
 	 * @throws InvalidConfigurationException
 	 */
@@ -167,6 +183,7 @@ public class Configuration {
 	
 	/**
 	 * 
+	 * 
 	 * @throws MappingException
 	 */
 	private void mapEntityClasses() throws MappingException{
@@ -183,6 +200,7 @@ public class Configuration {
 	}
 	
 	/**
+	 * 
 	 * 
 	 * @throws FileNotFoundException
 	 * @throws PropertyValueNotFound
@@ -203,6 +221,7 @@ public class Configuration {
 	/**
 	 * 
 	 * 
+	 * @throws LdapSessionException
 	 */
 	private void initLdapSession() throws LdapSessionException{
 		
@@ -211,7 +230,8 @@ public class Configuration {
 	
 	/**
 	 * 
-	 * @return the entityMappings
+	 * 
+	 * @return
 	 */
 	public Map<Class, EntityMapping> getEntityMappings() {
 		return entityMappings;
@@ -219,7 +239,8 @@ public class Configuration {
 
 	/**
 	 * 
-	 * @return the entityRegistrator
+	 * 
+	 * @return
 	 */
 	public Registrator<Class> getEntityRegistrator() {
 		return entityRegistrator;
@@ -227,7 +248,8 @@ public class Configuration {
 
 	/**
 	 * 
-	 * @return the validationRegistrator
+	 * 
+	 * @return
 	 */
 	public Registrator<Class> getValidationRegistrator() {
 		return validationRegistrator;
@@ -235,7 +257,8 @@ public class Configuration {
 
 	/**
 	 * 
-	 * @return the validatorReflector
+	 * 
+	 * @return
 	 */
 	public ValidatorReflector getValidatorReflector() {
 	    return validatorReflector;
@@ -243,13 +266,16 @@ public class Configuration {
 
 	/**
 	 * 
-	 * @return the ldapSession
+	 * 
+	 * @return
 	 */
 	public LdapSession getLdapSession() {
 		return ldapSession;
 	}
 
 	/**
+	 * 
+	 * 
 	 * @return the ldapServerHost
 	 */
 	public String getLdapServerHost() {
@@ -257,6 +283,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @param ldapServerHost the ldapServerHost to set
 	 */
 	public void setLdapServerHost(String ldapServerHost) {
@@ -264,6 +292,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @return the ldapServerPort
 	 */
 	public String getLdapServerPort() {
@@ -271,6 +301,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @param ldapServerPort the ldapServerPort to set
 	 */
 	public void setLdapServerPort(String ldapServerPort) {
@@ -278,6 +310,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @return the ldapServerBaseDn
 	 */
 	public String getLdapServerBaseDn() {
@@ -285,6 +319,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @param ldapServerBaseDn the ldapServerBaseDn to set
 	 */
 	public void setLdapServerBaseDn(String ldapServerBaseDn) {
@@ -292,6 +328,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @return the ldapServerUsername
 	 */
 	public String getLdapServerUsername() {
@@ -299,6 +337,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @param ldapServerUsername the ldapServerUsername to set
 	 */
 	public void setLdapServerUsername(String ldapServerUsername) {
@@ -306,6 +346,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @return the ldapServerPassword
 	 */
 	public String getLdapServerPassword() {
@@ -313,6 +355,8 @@ public class Configuration {
 	}
 
 	/**
+	 * 
+	 * 
 	 * @param ldapServerPassword the ldapServerPassword to set
 	 */
 	public void setLdapServerPassword(String ldapServerPassword) {

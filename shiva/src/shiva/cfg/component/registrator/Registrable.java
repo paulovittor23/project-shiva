@@ -3,6 +3,15 @@ package shiva.cfg.component.registrator;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ * @param <E>
+ */
 public interface Registrable<E> {
 	
 	/**

@@ -14,10 +14,10 @@ import shiva.session.component.persister.EntityPersister;
 import shiva.session.component.persister.EntityPersisterImpl;
 import shiva.session.component.validator.EntityValidator;
 import shiva.session.component.validator.EntityValidatorImpl;
-import shiva.util.connection.JdbcLdapConnectionFactory;
+import shiva.util.connection.ConnectionFactory;
 
 @SuppressWarnings( {
-	"unchecked"
+	"unchecked", "unused"
 } )
 public class LdapSession implements Queryable, Persistable {
 
@@ -34,6 +34,7 @@ public class LdapSession implements Queryable, Persistable {
 
 	/**
 	 * 
+	 * 
 	 */
 	private LdapSession() {
 		this.entityValidator = new EntityValidatorImpl();
@@ -41,6 +42,7 @@ public class LdapSession implements Queryable, Persistable {
 	}
 
 	/**
+	 * 
 	 * 
 	 * @return
 	 */
@@ -52,6 +54,7 @@ public class LdapSession implements Queryable, Persistable {
 	}
 
 	/**
+	 * 
 	 * 
 	 * @param config
 	 * @return
@@ -66,11 +69,12 @@ public class LdapSession implements Queryable, Persistable {
 
 	/**
 	 * 
+	 * 
 	 * @param sql
 	 */
-	protected void executeUpdateSql( String sql ) {
+	private void executeUpdateSql( String sql ) {
 		try {
-			JdbcLdapConnectionFactory factory = new JdbcLdapConnectionFactory();
+			ConnectionFactory factory = new ConnectionFactory();
 			Connection conn = factory.getConnection( this.config );
 
 			PreparedStatement ps = conn.prepareStatement( sql );
@@ -83,14 +87,15 @@ public class LdapSession implements Queryable, Persistable {
 
 	/**
 	 * 
+	 * 
 	 * @param sql
 	 * @return
 	 */
-	protected ResultSet executeQuerySql( String sql ) {
+	private ResultSet executeQuerySql( String sql ) {
 		ResultSet rs = null;
 
 		try {
-			JdbcLdapConnectionFactory factory = new JdbcLdapConnectionFactory();
+			ConnectionFactory factory = new ConnectionFactory();
 			Connection conn = factory.getConnection( this.config );
 
 			PreparedStatement ps = conn.prepareStatement( sql );
@@ -105,8 +110,7 @@ public class LdapSession implements Queryable, Persistable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see jldap.session.Session#persist(java.lang.Object)
+	 * @see shiva.session.Persistable#persist(java.lang.Object)
 	 */
 	public void persist(Object ldapEntity) {
 
@@ -124,8 +128,7 @@ public class LdapSession implements Queryable, Persistable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see jldap.session.Session#delete(java.lang.Object)
+	 * @see shiva.session.Persistable#delete(java.lang.Object)
 	 */
 	public void delete( Object ldapEntity ) {
 
@@ -141,11 +144,12 @@ public class LdapSession implements Queryable, Persistable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see jldap.session.Session#update(java.lang.Object)
+	 * @see shiva.session.Persistable#update(java.lang.Object)
 	 */
 	public void update( Object ldapEntity ) {
 
+		// validate ldap entity object
+		
 	}
 
 }

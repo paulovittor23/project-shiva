@@ -7,11 +7,10 @@ import java.lang.annotation.Target;
 
 /**
  * 
- * 
- * @author paulo
+ * @author Paulo Vitor
+ * @author Roberto Su
  * 
  * @description
- *
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

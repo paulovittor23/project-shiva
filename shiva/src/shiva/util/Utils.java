@@ -13,6 +13,14 @@ import org.apache.log4j.Logger;
 import shiva.util.model.PropertiesType;
 import shiva.util.model.exception.PropertyValueNotFound;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 public class Utils {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
@@ -28,6 +36,7 @@ public class Utils {
 	/**
 	 * 
 	 * 
+	 * 
 	 * @return
 	 */
 	public static synchronized Utils getInstance(){
@@ -38,7 +47,6 @@ public class Utils {
 	}
 
 	/**
-	 * 
 	 * 
 	 * 
 	 * @param file_type
@@ -68,7 +76,6 @@ public class Utils {
 	/**
 	 * 
 	 * 
-	 * 
 	 * @param file_type
 	 * @param key
 	 * @return
@@ -91,7 +98,6 @@ public class Utils {
 	/**
 	 * 
 	 * 
-	 * 
 	 * @param properties
 	 * @param key
 	 * @return
@@ -107,7 +113,6 @@ public class Utils {
 	}
 
 	/**
-	 * 
 	 * 
 	 * 
 	 * @param annotation

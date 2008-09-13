@@ -6,6 +6,14 @@ import java.util.Set;
 
 import org.apache.commons.collections.SequencedHashMap;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 @SuppressWarnings("unchecked")
 public class EntityMapping {
 	

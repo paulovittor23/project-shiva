@@ -1,5 +1,13 @@
 package shiva.session.component.persister.model;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 public class Delete {
 
 	private String uid;
@@ -7,8 +15,11 @@ public class Delete {
 	private String[] objectClasses; 
 	private String where;
 
-	public Delete() {
-	}
+	/**
+	 * 
+	 * 
+	 */
+	public Delete() {}
 
 	/**
 	 * @return the uid

@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import shiva.cfg.Configuration;
 
-public class JdbcLdapConnectionFactory {
+public class ConnectionFactory {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 	

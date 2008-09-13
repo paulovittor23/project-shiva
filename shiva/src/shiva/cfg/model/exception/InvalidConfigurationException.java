@@ -3,13 +3,21 @@ package shiva.cfg.model.exception;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Paulo Vitor
+ * @author Roberto Su
+ * 
+ * @description
+ *
+ */
 public class InvalidConfigurationException extends Exception {
 
 	private static final long serialVersionUID = -7842595560585138491L;
 	
+	//
 	private static final String defaultMessage= "Call getImplicitExceptions to see the exception causes.";
-	
-	List<Exception> implicitExceptions;
+	private List<Exception> implicitExceptions;
 
 	/**
 	 * 
