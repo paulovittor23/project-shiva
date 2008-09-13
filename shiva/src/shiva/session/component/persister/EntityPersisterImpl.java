@@ -7,10 +7,10 @@ import java.util.Set;
 import org.apache.commons.collections.SequencedHashMap;
 import org.apache.log4j.Logger;
 
-import shiva.cfg.component.mapper.model.metadata.AttributeMapping;
-import shiva.cfg.component.mapper.model.metadata.EntityMapping;
-import shiva.session.component.persister.model.Delete;
-import shiva.session.component.persister.model.Insert;
+import shiva.domain.metadata.AttributeMapping;
+import shiva.domain.metadata.EntityMapping;
+import shiva.domain.operation.Delete;
+import shiva.domain.operation.Insert;
 
 /**
  * 

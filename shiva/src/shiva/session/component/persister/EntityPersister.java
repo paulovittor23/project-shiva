@@ -1,6 +1,6 @@
 package shiva.session.component.persister;
 
-import shiva.cfg.component.mapper.model.metadata.EntityMapping;
+import shiva.domain.metadata.EntityMapping;
 
 /**
  * 

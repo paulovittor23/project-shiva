@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import shiva.cfg.Configuration;
-import shiva.cfg.component.mapper.model.metadata.EntityMapping;
+import shiva.domain.metadata.EntityMapping;
 import shiva.session.component.persister.EntityPersister;
 import shiva.session.component.persister.EntityPersisterImpl;
 import shiva.session.component.validator.EntityValidator;
