@@ -10,16 +10,17 @@ import org.apache.log4j.Logger;
 
 import shiva.cfg.component.mapper.EntityMapper;
 import shiva.cfg.component.mapper.Mapper;
-import shiva.cfg.component.mapper.model.exception.MappingException;
-import shiva.cfg.component.mapper.model.metadata.EntityMapping;
 import shiva.cfg.component.reflector.ValidatorReflector;
 import shiva.cfg.component.reflector.ValidatorReflectorImpl;
 import shiva.cfg.component.registrator.Registrator;
-import shiva.cfg.model.exception.InvalidConfigurationException;
-import shiva.cfg.model.exception.LdapSessionException;
+import shiva.domain.exception.InvalidConfigurationException;
+import shiva.domain.exception.LdapSessionException;
+import shiva.domain.exception.MappingException;
+import shiva.domain.metadata.EntityMapping;
 import shiva.session.LdapSession;
 import shiva.util.Utils;
 import shiva.util.model.exception.PropertyValueNotFound;
+
 import static shiva.util.model.PropertiesType.*;
 
 /**

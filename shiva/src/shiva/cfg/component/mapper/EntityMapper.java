@@ -10,12 +10,12 @@ import java.util.Set;
 import org.apache.commons.collections.SequencedHashMap;
 import org.apache.log4j.Logger;
 
-import shiva.cfg.component.mapper.model.exception.ColumnAnnotationNotFoundException;
-import shiva.cfg.component.mapper.model.exception.EntityAnnotationNotFoundException;
-import shiva.cfg.component.mapper.model.exception.UidAttributeNotFoundException;
-import shiva.cfg.component.mapper.model.metadata.AttributeMapping;
-import shiva.cfg.component.mapper.model.metadata.EntityMapping;
 import shiva.cfg.component.reflector.EntityReflectorImpl;
+import shiva.domain.exception.ColumnAnnotationNotFoundException;
+import shiva.domain.exception.EntityAnnotationNotFoundException;
+import shiva.domain.exception.UidAttributeNotFoundException;
+import shiva.domain.metadata.AttributeMapping;
+import shiva.domain.metadata.EntityMapping;
 
 /**
  * 
