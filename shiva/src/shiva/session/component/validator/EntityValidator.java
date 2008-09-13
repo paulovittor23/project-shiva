@@ -3,9 +3,9 @@ package shiva.session.component.validator;
 import java.lang.reflect.Field;
 
 import shiva.cfg.Configuration;
-import shiva.cfg.component.mapper.model.metadata.AttributeMapping;
-import shiva.session.component.validator.model.exception.ObjectTypeNotRegisteredException;
-import shiva.session.component.validator.model.exception.ValidationException;
+import shiva.domain.exception.ObjectTypeNotRegisteredException;
+import shiva.domain.exception.ValidationException;
+import shiva.domain.metadata.AttributeMapping;
 
 public interface EntityValidator {
 

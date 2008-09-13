@@ -7,10 +7,10 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import shiva.cfg.Configuration;
-import shiva.cfg.component.mapper.model.metadata.AttributeMapping;
-import shiva.cfg.component.mapper.model.metadata.EntityMapping;
-import shiva.session.component.validator.model.exception.ObjectTypeNotRegisteredException;
-import shiva.session.component.validator.model.exception.ValidationException;
+import shiva.domain.exception.ObjectTypeNotRegisteredException;
+import shiva.domain.exception.ValidationException;
+import shiva.domain.metadata.AttributeMapping;
+import shiva.domain.metadata.EntityMapping;
 
 @SuppressWarnings("unchecked")
 public class EntityValidatorImpl implements EntityValidator {
