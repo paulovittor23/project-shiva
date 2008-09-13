@@ -1,4 +1,4 @@
-package shiva.domain.mapping;
+package shiva.domain.annotation.mapping;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

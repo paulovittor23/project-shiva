@@ -1,6 +1,6 @@
 package shiva.domain.exception;
 
-import shiva.domain.mapping.LdapEntity;
+import shiva.domain.annotation.mapping.LdapEntity;
 
 /**
  * 
