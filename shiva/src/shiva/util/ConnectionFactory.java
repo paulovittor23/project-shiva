@@ -1,4 +1,4 @@
-package shiva.util.conn;
+package shiva.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
