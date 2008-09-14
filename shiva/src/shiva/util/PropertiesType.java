@@ -1,4 +1,4 @@
-package shiva.util.model;
+package shiva.util;
 
 /**
  * 

@@ -10,8 +10,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import shiva.util.model.PropertiesType;
-import shiva.util.model.exception.PropertyValueNotFound;
+import shiva.domain.exception.PropertyValueNotFound;
 
 /**
  * 
