@@ -14,7 +14,7 @@ import shiva.session.component.persister.EntityPersister;
 import shiva.session.component.persister.EntityPersisterImpl;
 import shiva.session.component.validator.EntityValidator;
 import shiva.session.component.validator.EntityValidatorImpl;
-import shiva.util.connection.ConnectionFactory;
+import shiva.util.ConnectionFactory;
 
 @SuppressWarnings( {
 	"unchecked", "unused"

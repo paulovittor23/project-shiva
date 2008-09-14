@@ -8,8 +8,8 @@ import java.util.Collection;
 
 import org.apache.log4j.Logger;
 
-import shiva.domain.mapping.LdapAttribute;
-import shiva.domain.mapping.LdapEntity;
+import shiva.domain.annotation.mapping.LdapAttribute;
+import shiva.domain.annotation.mapping.LdapEntity;
 import shiva.util.Utils;
 
 /**

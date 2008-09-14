@@ -2,7 +2,7 @@ package main;
 
 import model.Funcionario;
 import shiva.cfg.Configuration;
-import shiva.cfg.model.exception.InvalidConfigurationException;
+import shiva.domain.exception.InvalidConfigurationException;
 import shiva.session.LdapSession;
 
 public class Main {

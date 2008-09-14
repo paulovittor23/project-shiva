@@ -1,7 +1,7 @@
 package model;
 
-import shiva.cfg.component.mapper.model.LdapAttribute;
-import shiva.cfg.component.mapper.model.LdapEntity;
+import shiva.domain.annotation.mapping.LdapAttribute;
+import shiva.domain.annotation.mapping.LdapEntity;
 
 @LdapEntity(
 	directory="ou=funcionarios,o=unisantos",

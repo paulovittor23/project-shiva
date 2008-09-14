@@ -16,12 +16,12 @@ import shiva.cfg.component.registrator.Registrator;
 import shiva.domain.exception.InvalidConfigurationException;
 import shiva.domain.exception.LdapSessionException;
 import shiva.domain.exception.MappingException;
+import shiva.domain.exception.PropertyValueNotFound;
 import shiva.domain.metadata.EntityMapping;
 import shiva.session.LdapSession;
 import shiva.util.Utils;
-import shiva.util.model.exception.PropertyValueNotFound;
 
-import static shiva.util.model.PropertiesType.*;
+import static shiva.util.PropertiesType.*;
 
 /**
  * 
