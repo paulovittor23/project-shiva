@@ -10,10 +10,10 @@ import org.apache.log4j.Logger;
 
 import shiva.cfg.Configuration;
 import shiva.domain.metadata.EntityMapping;
-import shiva.session.component.persister.EntityPersister;
-import shiva.session.component.persister.EntityPersisterImpl;
-import shiva.session.component.validator.EntityValidator;
-import shiva.session.component.validator.EntityValidatorImpl;
+import shiva.session.persister.EntityPersister;
+import shiva.session.persister.EntityPersisterImpl;
+import shiva.session.validator.EntityValidator;
+import shiva.session.validator.EntityValidatorImpl;
 import shiva.util.ConnectionFactory;
 
 @SuppressWarnings( {
