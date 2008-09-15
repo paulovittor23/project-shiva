@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import shiva.domain.metadata.AttributeMapping;
 import shiva.domain.metadata.EntityMapping;
+import shiva.domain.operation.Operation;
 import shiva.domain.operation.Delete;
 import shiva.domain.operation.Insert;
 import shiva.domain.operation.Update;
@@ -117,14 +118,14 @@ public class EntityPersisterImpl implements EntityPersister {
 	 */
 	public String generateUpdateString(EntityMapping em, Object ldapEntity) {
 
-		Update update = new Update();
+		Operation operation = new Update();
 
 		// directoryName
 		String directoryNameBound = em.getDirectoryNameBound();
-		update.setDirectoryName( directoryNameBound );
+		operation.setDirectoryName( directoryNameBound );
 
 		// objectClass
-		update.setObjectClasses( em.getObjectClass() );		
+		operation.setObjectClasses( em.getObjectClass() );		
 		
 		// attributes
 		Map<String, Object> columns = new SequencedHashMap();
@@ -144,7 +145,7 @@ public class EntityPersisterImpl implements EntityPersister {
 				Object attributeValue = am.getAttribute().get( ldapEntity );
 				
 				if(am.isUidAttribute()){
-					update.setUid( ((String) attributeValue) + "," + directoryNameBound );
+					operation.setUid( ((String) attributeValue) + "," + directoryNameBound );
 				}
 				
 				columns.put(attributeNameBound, attributeValue );
@@ -156,8 +157,8 @@ public class EntityPersisterImpl implements EntityPersister {
 			}
 		}
 		
-		update.setColumns(columns);
-		return update.toStatementString();
+		operation.setColumns(columns);
+		return operation.toStatementString();
 	}
 		
 }

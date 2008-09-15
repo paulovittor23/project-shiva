@@ -16,7 +16,10 @@ public class Update extends AbstractOperation {
 	 */
 	public String toStatementString() {
 		
-		return null;
+		StringBuffer buf = new StringBuffer();
+		buf.append("UPDATE INTO ").append("uid=").append(uid);
+		
+		return buf.toString();
 	}
 
 	

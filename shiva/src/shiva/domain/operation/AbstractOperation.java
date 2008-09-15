@@ -14,7 +14,7 @@ import org.apache.commons.collections.SequencedHashMap;
  * 
  */
 @SuppressWarnings( "unchecked" )
-public abstract class AbstractOperation implements CrudOperation {
+public abstract class AbstractOperation implements Operation {
 
 	protected String uid;
 
@@ -28,8 +28,9 @@ public abstract class AbstractOperation implements CrudOperation {
 	 * 
 	 * 
 	 */
-	public AbstractOperation() {}
-	
+	public AbstractOperation() {
+	}
+
 	/**
 	 * 
 	 * @param directoryName
@@ -38,19 +39,13 @@ public abstract class AbstractOperation implements CrudOperation {
 		this.directoryName = directoryName;
 	}
 
+	/* getters */
+
 	/**
 	 * @return the uid
 	 */
 	public String getUid() {
 		return this.uid;
-	}
-
-	/**
-	 * @param uid
-	 *            the uid to set
-	 */
-	public void setUid( String uid ) {
-		this.uid = uid;
 	}
 
 	/**
@@ -61,26 +56,10 @@ public abstract class AbstractOperation implements CrudOperation {
 	}
 
 	/**
-	 * @param directoryName
-	 *            the directoryName to set
-	 */
-	public void setDirectoryName( String directoryName ) {
-		this.directoryName = directoryName;
-	}
-
-	/**
 	 * @return the objectClasses
 	 */
 	public String[] getObjectClasses() {
 		return this.objectClasses;
-	}
-
-	/**
-	 * @param objectClasses
-	 *            the objectClasses to set
-	 */
-	public void setObjectClasses( String[] objectClasses ) {
-		this.objectClasses = objectClasses;
 	}
 
 	/**
@@ -90,12 +69,44 @@ public abstract class AbstractOperation implements CrudOperation {
 		return this.columns;
 	}
 
-	/**
-	 * @param columns
-	 *            the columns to set
+	/* setters */
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see shiva.domain.operation.CrudOperation#setColumns(java.util.Map)
 	 */
 	public void setColumns( Map columns ) {
 		this.columns = columns;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * shiva.domain.operation.CrudOperation#setDirectoryName(java.lang.String)
+	 */
+	public void setDirectoryName( String directoryName ) {
+		this.directoryName = directoryName;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * shiva.domain.operation.CrudOperation#setObjectClasses(java.lang.String[])
+	 */
+	public void setObjectClasses( String[] objectClasses ) {
+		this.objectClasses = objectClasses;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see shiva.domain.operation.CrudOperation#setUid(java.lang.String)
+	 */
+	public void setUid( String uid ) {
+		this.uid = uid;
 	}
 
 }
