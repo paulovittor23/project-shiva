@@ -10,7 +10,6 @@ import shiva.domain.metadata.EntityMapping;
  * @description
  *
  */
-@SuppressWarnings({"unchecked", "unused"})
 public interface EntityPersister {
 	
 	/**

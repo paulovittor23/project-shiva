@@ -17,7 +17,7 @@ public class Funcionario {
 	
 	@LdapAttribute("uid")
 	private String id;
-
+	
 	public String getId() {
 		return id;
 	}

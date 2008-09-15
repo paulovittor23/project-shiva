@@ -11,6 +11,7 @@ import shiva.domain.metadata.AttributeMapping;
 import shiva.domain.metadata.EntityMapping;
 import shiva.domain.operation.Delete;
 import shiva.domain.operation.Insert;
+import shiva.domain.operation.Update;
 
 /**
  * 
@@ -56,7 +57,7 @@ public class EntityPersisterImpl implements EntityPersister {
 				String attributeNameBound = am.getAttributeNameBound();
 				Object attributeValue = am.getAttribute().get( ldapEntity );
 				
-				if(attributeNameBound.equalsIgnoreCase( "uid" )){
+				if(am.isUidAttribute()){
 					insert.setUid( ((String) attributeValue) + "," + directoryNameBound );
 				}
 				
@@ -81,12 +82,31 @@ public class EntityPersisterImpl implements EntityPersister {
 		
 		Delete delete = new Delete();
 		
-		// directoryName
-		String directoryNameBound = em.getDirectoryNameBound();
-		delete.setDirectoryName( directoryNameBound );
-		
-		// objectClass
-		delete.setObjectClasses( em.getObjectClass() );
+		try {
+			
+			// directoryName
+			String directoryNameBound = em.getDirectoryNameBound();
+			delete.setDirectoryName( directoryNameBound );
+			
+			// uid
+			AttributeMapping uidAttribute = em.getUidAttribute();
+			Field attribute = uidAttribute.getAttribute();
+			
+			if( ! attribute.isAccessible() ){
+				attribute.setAccessible( true );
+			}
+			
+			Object attributeValue = attribute.get( ldapEntity );
+			delete.setUid( (String) attributeValue );
+			
+			// objectClass
+			//delete.setObjectClasses( em.getObjectClass() );
+			
+		} catch ( IllegalArgumentException e ) {
+			logger.error("generateDeleteString is not ok :(", e);
+		} catch ( IllegalAccessException e ) {
+			logger.error("generateDeleteString is not ok :(", e);
+		}
 		
 		return delete.toStatementString();
 	}
@@ -96,7 +116,48 @@ public class EntityPersisterImpl implements EntityPersister {
 	 * @see jldap.session.component.persister.EntityPersister#generateUpdateString(java.lang.Object)
 	 */
 	public String generateUpdateString(EntityMapping em, Object ldapEntity) {
-		return null;
-	}
 
+		Update update = new Update();
+
+		// directoryName
+		String directoryNameBound = em.getDirectoryNameBound();
+		update.setDirectoryName( directoryNameBound );
+
+		// objectClass
+		update.setObjectClasses( em.getObjectClass() );		
+		
+		// attributes
+		Map<String, Object> columns = new SequencedHashMap();
+		
+		Map<Field, AttributeMapping> ams = em.getAttributesMapped();
+		Set<Field> keySet = ams.keySet();
+				
+		for (Field field : keySet) {
+			AttributeMapping am = ams.get( field );
+			
+			try {
+				
+				//
+				am.getAttribute().setAccessible( true );
+				
+				String attributeNameBound = am.getAttributeNameBound();
+				Object attributeValue = am.getAttribute().get( ldapEntity );
+				
+				if(am.isUidAttribute()){
+					update.setUid( ((String) attributeValue) + "," + directoryNameBound );
+				}
+				
+				columns.put(attributeNameBound, attributeValue );
+				
+			} catch (IllegalArgumentException e) {
+				logger.error("generateInsertString is not ok :(", e);
+			} catch (IllegalAccessException e) {
+				logger.error("generateInsertString is not ok :(", e);
+			}
+		}
+		
+		update.setColumns(columns);
+		return update.toStatementString();
+	}
+		
 }

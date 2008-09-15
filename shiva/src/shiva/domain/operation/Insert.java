@@ -1,9 +1,6 @@
 package shiva.domain.operation;
 
 import java.util.Iterator;
-import java.util.Map;
-
-import org.apache.commons.collections.SequencedHashMap;
 
 /**
  * 
@@ -14,90 +11,11 @@ import org.apache.commons.collections.SequencedHashMap;
  *
  */
 @SuppressWarnings("unchecked")
-public class Insert {
+public class Insert extends AbstractOperation {
 
-	private String uid;
-	private String directoryName;
-	private String[] objectClasses;
-	private Map columns = new SequencedHashMap();
-
-	/**
-	 * 
-	 * 
-	 */
-	public Insert() {}
-	
-	/**
-	 * 
-	 * 
-	 * @param directoryName
-	 */
-	public Insert(String directoryName) {
-		this.directoryName = directoryName;
-	}
-	
-	/**
-	 * @return the uid
-	 */
-	public String getUid() {
-		return this.uid;
-	}
-
-	/**
-	 * @param uid the uid to set
-	 */
-	public void setUid( String uid ) {
-		this.uid = uid;
-	}
-
-	/**
-	 * @return the directoryName
-	 */
-	public String getDirectoryName() {
-		return directoryName;
-	}
-
-	/**
-	 * @param directoryName
-	 *            the directoryName to set
-	 */
-	public void setDirectoryName(String directoryName) {
-		this.directoryName = directoryName;
-	}
-	
-	/**
-	 * @return the objectClasses
-	 */
-	public String[] getObjectClasses() {
-		return objectClasses;
-	}
-
-	/**
-	 * @param objectClasses the objectClasses to set
-	 */
-	public void setObjectClasses(String[] objectClasses) {
-		this.objectClasses = objectClasses;
-	}
-
-	/**
-	 * @return the columns
-	 */
-	public Map getColumns() {
-		return columns;
-	}
-
-	/**
-	 * @param columns
-	 *            the columns to set
-	 */
-	public void setColumns(Map columns) {
-		this.columns = columns;
-	}
-
-	/**
-	 * 
-	 * 
-	 * @return
+	/*
+	 * (non-Javadoc)
+	 * @see shiva.domain.operation.CrudOperation#toStatementString()
 	 */
 	public String toStatementString() {
 		

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import shiva.cfg.component.mapper.EntityMapper;
@@ -116,9 +115,9 @@ public class Configuration {
 			validationPackage = utils.getPropertyValueByKey(UTIL_PROPERTIES_FILE, VALIDATION_CLASSES_PACKAGE);
 			
 		} catch (FileNotFoundException e) {
-			logger.log(Level.WARN, e.getMessage());
+			logger.error( "registerValidatorClasses is not ok :(", e );
 		} catch (PropertyValueNotFound e) {
-			logger.log(Level.WARN, e.getMessage());
+			logger.error( "registerValidatorClasses is not ok :(", e );
 		}
 		
 		Class[] classes = this.validatorReflector.getClasses(validationPackage);
@@ -130,7 +129,7 @@ public class Configuration {
 		}
 		
 		if( this.validationRegistrator.registeredObjectsCount() == 0 ){
-			logger.log(Level.WARN, "Nenhuma classe de validação foi devidamente registrada.");
+			logger.error( "Any validation class was successfully registered." );
 		}
 	}
 	
@@ -191,7 +190,7 @@ public class Configuration {
 		Integer registeredObjectsCount = this.entityRegistrator.registeredObjectsCount();
 		
 		if( registeredObjectsCount == 0 ){
-			throw new MappingException("Não existem classes de entidade a serem mapeadas.");
+			throw new MappingException("There aren't entity classes to be mapped.");
 		}
 		
 		Set<Class> registeredObjects = this.entityRegistrator.getRegisteredObjects();

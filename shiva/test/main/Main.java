@@ -8,7 +8,8 @@ import shiva.session.LdapSession;
 public class Main {
 
 	public static void main( String[] args ) {
-		configuraJLdapAnnotations();
+		//
+		configurarShiva();
 
 		Funcionario a = new Funcionario();
 		a.setId( "cribeiro" );
@@ -22,9 +23,12 @@ public class Main {
 		
 		LdapSession.getInstance().persist( a );
 		LdapSession.getInstance().persist( b );
+		
+		LdapSession.getInstance().delete( a );
+		LdapSession.getInstance().delete( b );
 	}
 
-	private static void configuraJLdapAnnotations() {
+	private static void configurarShiva() {
 		Configuration c = Configuration.getInstance();
 		c.getEntityRegistrator().register( Funcionario.class );
 

@@ -1,6 +1,7 @@
 package shiva.domain.metadata;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -98,6 +99,28 @@ public class EntityMapping {
 		}
 		
 		this.attributesMapped.put(attribute, attributeMapping);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public AttributeMapping getUidAttribute(){
+		
+		if( this.attributesMapped == null || this.attributesMapped.size() == 0 ){
+			return null;
+		}
+		
+		Collection<AttributeMapping> values = this.attributesMapped.values();
+		
+		for( AttributeMapping am : values ) {
+			if( am.isUidAttribute() ){
+				return am;
+			}
+		}
+		
+		return null;				
 	}
 
 	/**

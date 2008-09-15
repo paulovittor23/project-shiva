@@ -17,16 +17,14 @@ import shiva.session.component.validator.EntityValidatorImpl;
 import shiva.util.ConnectionFactory;
 
 @SuppressWarnings( {
-	"unchecked", "unused"
+		"unchecked", "unused"
 } )
 public class LdapSession implements Queryable, Persistable {
 
 	private Logger logger = Logger.getLogger( this.getClass() );
 
 	private Configuration config;
-
 	private EntityValidator entityValidator = null;
-
 	private EntityPersister entityPersister = null;
 
 	// singleton instance
@@ -110,24 +108,26 @@ public class LdapSession implements Queryable, Persistable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see shiva.session.Persistable#persist(java.lang.Object)
 	 */
-	public void persist(Object ldapEntity) {
+	public void persist( Object ldapEntity ) {
 
 		// validate ldap entity object
 
 		//
 		Map<Class, EntityMapping> ems = config.getEntityMappings();
-		EntityMapping em = ems.get(ldapEntity.getClass());
+		EntityMapping em = ems.get( ldapEntity.getClass() );
 
-		String insertSql = this.entityPersister.generateInsertString(em, ldapEntity);
-		
-		logger.info("insert string: " + insertSql);
-		this.executeUpdateSql(insertSql);
+		String insertSql = this.entityPersister.generateInsertString( em, ldapEntity );
+
+		logger.info( "generating insert string: " + insertSql );
+		this.executeUpdateSql( insertSql );
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see shiva.session.Persistable#delete(java.lang.Object)
 	 */
 	public void delete( Object ldapEntity ) {
@@ -137,19 +137,29 @@ public class LdapSession implements Queryable, Persistable {
 		EntityMapping em = ems.get( ldapEntity.getClass() );
 
 		String deleteSql = this.entityPersister.generateDeleteString( em, ldapEntity );
-		
-		logger.info("insert string: " + deleteSql);
-		this.executeUpdateSql(deleteSql);
+
+		logger.info( "generating delete string: " + deleteSql );
+		this.executeUpdateSql( deleteSql );
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see shiva.session.Persistable#update(java.lang.Object)
 	 */
 	public void update( Object ldapEntity ) {
 
 		// validate ldap entity object
-		
+
+		//
+		Map<Class, EntityMapping> ems = config.getEntityMappings();
+		EntityMapping em = ems.get( ldapEntity.getClass() );
+
+		String updateSql = this.entityPersister.generateUpdateString( em, ldapEntity );
+
+		logger.info( "generating update string: " + updateSql );
+		this.executeUpdateSql( updateSql );
+
 	}
 
 }
