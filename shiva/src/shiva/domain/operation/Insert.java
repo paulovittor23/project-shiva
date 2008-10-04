@@ -10,13 +10,13 @@ import java.util.Iterator;
  * @description
  *
  */
-@SuppressWarnings("unchecked")
 public class Insert extends AbstractOperation {
 
 	/*
 	 * (non-Javadoc)
 	 * @see shiva.domain.operation.CrudOperation#toStatementString()
 	 */
+	@SuppressWarnings("unchecked")
 	public String toStatementString() {
 		
 		StringBuffer buf = new StringBuffer();

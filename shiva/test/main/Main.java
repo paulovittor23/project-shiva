@@ -21,11 +21,20 @@ public class Main {
 		b.setNome( "Luisa" );
 		b.setSobrenome( "Dantas" );
 		
-		LdapSession.getInstance().persist( a );
-		LdapSession.getInstance().persist( b );
+		//insert
+		//LdapSession.getInstance().persist( a );
+		//LdapSession.getInstance().persist( b );
 		
-		LdapSession.getInstance().delete( a );
-		LdapSession.getInstance().delete( b );
+		a.setSobrenome( "Sobrenome A" );
+		b.setSobrenome( "Sobrenome B" );
+		
+		//update
+		LdapSession.getInstance().update( a );
+		LdapSession.getInstance().update( b );
+		
+		//delete
+		//LdapSession.getInstance().delete( a );
+		//LdapSession.getInstance().delete( b );
 	}
 
 	private static void configurarShiva() {

@@ -32,14 +32,14 @@ public class EntityPersisterImpl implements EntityPersister {
 	 */
 	public String generateInsertString(EntityMapping em, Object ldapEntity) {
 		
-		Insert insert = new Insert();
+		Operation operation = new Insert();
 
 		// directoryName
 		String directoryNameBound = em.getDirectoryNameBound();
-		insert.setDirectoryName( directoryNameBound );
+		operation.setDirectoryName( directoryNameBound );
 
 		// objectClass
-		insert.setObjectClasses( em.getObjectClass() );		
+		operation.setObjectClasses( em.getObjectClass() );		
 		
 		// attributes
 		Map<String, Object> columns = new SequencedHashMap();
@@ -59,7 +59,7 @@ public class EntityPersisterImpl implements EntityPersister {
 				Object attributeValue = am.getAttribute().get( ldapEntity );
 				
 				if(am.isUidAttribute()){
-					insert.setUid( ((String) attributeValue) + "," + directoryNameBound );
+					operation.setUid( ((String) attributeValue) + "," + directoryNameBound );
 				}
 				
 				columns.put(attributeNameBound, attributeValue );
@@ -71,8 +71,8 @@ public class EntityPersisterImpl implements EntityPersister {
 			}
 		}
 		
-		insert.setColumns(columns);
-		return insert.toStatementString();
+		operation.setColumns(columns);
+		return operation.toStatementString();
 	}
 	
 	/*
@@ -81,13 +81,13 @@ public class EntityPersisterImpl implements EntityPersister {
 	 */
 	public String generateDeleteString(EntityMapping em, Object ldapEntity) {
 		
-		Delete delete = new Delete();
+		Operation operation = new Delete();
 		
 		try {
 			
 			// directoryName
 			String directoryNameBound = em.getDirectoryNameBound();
-			delete.setDirectoryName( directoryNameBound );
+			operation.setDirectoryName( directoryNameBound );
 			
 			// uid
 			AttributeMapping uidAttribute = em.getUidAttribute();
@@ -98,7 +98,7 @@ public class EntityPersisterImpl implements EntityPersister {
 			}
 			
 			Object attributeValue = attribute.get( ldapEntity );
-			delete.setUid( (String) attributeValue );
+			operation.setUid( (String) attributeValue );
 			
 			// objectClass
 			//delete.setObjectClasses( em.getObjectClass() );
@@ -109,7 +109,7 @@ public class EntityPersisterImpl implements EntityPersister {
 			logger.error("generateDeleteString is not ok :(", e);
 		}
 		
-		return delete.toStatementString();
+		return operation.toStatementString();
 	}
 
 	/*
@@ -146,9 +146,9 @@ public class EntityPersisterImpl implements EntityPersister {
 				
 				if(am.isUidAttribute()){
 					operation.setUid( ((String) attributeValue) + "," + directoryNameBound );
+				}else{
+					columns.put(attributeNameBound, attributeValue );
 				}
-				
-				columns.put(attributeNameBound, attributeValue );
 				
 			} catch (IllegalArgumentException e) {
 				logger.error("generateInsertString is not ok :(", e);
