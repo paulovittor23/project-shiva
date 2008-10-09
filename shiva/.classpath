@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="lib/commons-collections-2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/ldap.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="lib/jdbcLdap.jar"/>
+	<classpathentry kind="lib" path="lib/jdbcldap.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
