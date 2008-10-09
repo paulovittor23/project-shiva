@@ -16,10 +16,8 @@ import shiva.session.validator.EntityValidator;
 import shiva.session.validator.EntityValidatorImpl;
 import shiva.util.ConnectionFactory;
 
-@SuppressWarnings( {
-		"unchecked", "unused"
-} )
-public class LdapSession implements Queryable, Persistable {
+@SuppressWarnings({"unused"})
+public class LdapSession {
 
 	private Logger logger = Logger.getLogger( this.getClass() );
 
@@ -30,14 +28,8 @@ public class LdapSession implements Queryable, Persistable {
 	// singleton instance
 	private static LdapSession instance;
 
-	/**
-	 * 
-	 * 
-	 */
-	private LdapSession() {
-		this.entityValidator = new EntityValidatorImpl();
-		this.entityPersister = new EntityPersisterImpl();
-	}
+	// private constructor
+	private LdapSession() {}
 
 	/**
 	 * 
@@ -61,85 +53,28 @@ public class LdapSession implements Queryable, Persistable {
 		if ( instance == null ) {
 			instance = new LdapSession();
 		}
+		
 		instance.config = config;
+		instance.entityValidator = new EntityValidatorImpl();
+		instance.entityPersister = new EntityPersisterImpl( instance.config );
+		
 		return instance;
 	}
 
 	/**
 	 * 
-	 * 
-	 * @param sql
+	 * @param ldapEntity
 	 */
-	private void executeUpdateSql( String sql ) {
-		try {
-			ConnectionFactory factory = new ConnectionFactory();
-			Connection conn = factory.getConnection( this.config );
-
-			PreparedStatement ps = conn.prepareStatement( sql );
-			ps.executeUpdate();
-
-		} catch ( SQLException e ) {
-			logger.error( "executeUpdateSql is not ok :(", e );
-		}
+	public void persist( Object ldapEntity ) {
+		this.entityPersister.persist(ldapEntity);
 	}
 
 	/**
 	 * 
-	 * 
-	 * @param sql
-	 * @return
-	 */
-	private ResultSet executeQuerySql( String sql ) {
-		ResultSet rs = null;
-
-		try {
-			ConnectionFactory factory = new ConnectionFactory();
-			Connection conn = factory.getConnection( this.config );
-
-			PreparedStatement ps = conn.prepareStatement( sql );
-			rs = ps.executeQuery();
-
-		} catch ( SQLException e ) {
-			logger.error( "executeQuerySql is not ok :(", e );
-		}
-
-		return rs;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see shiva.session.Persistable#persist(java.lang.Object)
-	 */
-	public void persist( Object ldapEntity ) {
-
-		// validate ldap entity object
-
-		//
-		Map<Class, EntityMapping> ems = config.getEntityMappings();
-		EntityMapping em = ems.get( ldapEntity.getClass() );
-
-		String insertSql = this.entityPersister.generateInsertString( em, ldapEntity );
-
-		logger.info( "generating insert string: " + insertSql );
-		this.executeUpdateSql( insertSql );
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see shiva.session.Persistable#delete(java.lang.Object)
+	 * @param ldapEntity
 	 */
 	public void delete( Object ldapEntity ) {
-
-		//
-		Map<Class, EntityMapping> ems = config.getEntityMappings();
-		EntityMapping em = ems.get( ldapEntity.getClass() );
-
-		String deleteSql = this.entityPersister.generateDeleteString( em, ldapEntity );
-
-		logger.info( "generating delete string: " + deleteSql );
-		this.executeUpdateSql( deleteSql );
+		this.entityPersister.delete(ldapEntity);
 	}
 
 	/*
@@ -148,18 +83,7 @@ public class LdapSession implements Queryable, Persistable {
 	 * @see shiva.session.Persistable#update(java.lang.Object)
 	 */
 	public void update( Object ldapEntity ) {
-
-		// validate ldap entity object
-
-		//
-		Map<Class, EntityMapping> ems = config.getEntityMappings();
-		EntityMapping em = ems.get( ldapEntity.getClass() );
-
-		String updateSql = this.entityPersister.generateUpdateString( em, ldapEntity );
-
-		logger.info( "generating update string: " + updateSql );
-		this.executeUpdateSql( updateSql );
-
+		this.entityPersister.update(ldapEntity);
 	}
 
 }

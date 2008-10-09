@@ -1,18 +1,19 @@
 package shiva.session.persister;
 
-import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
-import java.util.Set;
 
-import org.apache.commons.collections.SequencedHashMap;
 import org.apache.log4j.Logger;
 
-import shiva.domain.metadata.AttributeMapping;
+import shiva.cfg.Configuration;
 import shiva.domain.metadata.EntityMapping;
-import shiva.domain.operation.Operation;
-import shiva.domain.operation.Delete;
-import shiva.domain.operation.Insert;
-import shiva.domain.operation.Update;
+import shiva.session.persister.sql.CrudSqlGen;
+import shiva.session.persister.sql.SqlGen;
+import shiva.util.ConnectionFactory;
+
 
 /**
  * 
@@ -22,143 +23,112 @@ import shiva.domain.operation.Update;
  * @description
  *
  */
+@SuppressWarnings({"unused","unchecked"})
 public class EntityPersisterImpl implements EntityPersister {
-	
+			
 	private Logger logger = Logger.getLogger(this.getClass());
-
-	/*
-	 * (non-Javadoc)
-	 * @see jldap.session.component.persister.EntityPersister#generateInsertString(java.lang.Object)
+	
+	private SqlGen sqlGen = null;
+	private Configuration config = null;
+	
+	/**
+	 * 
+	 * @param config
 	 */
-	public String generateInsertString(EntityMapping em, Object ldapEntity) {
-		
-		Operation operation = new Insert();
-
-		// directoryName
-		String directoryNameBound = em.getDirectoryNameBound();
-		operation.setDirectoryName( directoryNameBound );
-
-		// objectClass
-		operation.setObjectClasses( em.getObjectClass() );		
-		
-		// attributes
-		Map<String, Object> columns = new SequencedHashMap();
-		
-		Map<Field, AttributeMapping> ams = em.getAttributesMapped();
-		Set<Field> keySet = ams.keySet();
-				
-		for (Field field : keySet) {
-			AttributeMapping am = ams.get( field );
-			
-			try {
-				
-				//
-				am.getAttribute().setAccessible( true );
-				
-				String attributeNameBound = am.getAttributeNameBound();
-				Object attributeValue = am.getAttribute().get( ldapEntity );
-				
-				if(am.isUidAttribute()){
-					operation.setUid( ((String) attributeValue) + "," + directoryNameBound );
-				}
-				
-				columns.put(attributeNameBound, attributeValue );
-				
-			} catch (IllegalArgumentException e) {
-				logger.error("generateInsertString is not ok :(", e);
-			} catch (IllegalAccessException e) {
-				logger.error("generateInsertString is not ok :(", e);
-			}
-		}
-		
-		operation.setColumns(columns);
-		return operation.toStatementString();
+	public EntityPersisterImpl( Configuration config ) {
+		this.sqlGen = new CrudSqlGen();
+		this.config = config;
 	}
 	
 	/*
 	 * (non-Javadoc)
-	 * @see jldap.session.component.persister.EntityPersister#generateDeleteString(java.lang.Object)
+	 * @see shiva.session.persister.EntityPersister#persist(java.lang.Object)
 	 */
-	public String generateDeleteString(EntityMapping em, Object ldapEntity) {
-		
-		Operation operation = new Delete();
-		
-		try {
-			
-			// directoryName
-			String directoryNameBound = em.getDirectoryNameBound();
-			operation.setDirectoryName( directoryNameBound );
-			
-			// uid
-			AttributeMapping uidAttribute = em.getUidAttribute();
-			Field attribute = uidAttribute.getAttribute();
-			
-			if( ! attribute.isAccessible() ){
-				attribute.setAccessible( true );
-			}
-			
-			Object attributeValue = attribute.get( ldapEntity );
-			operation.setUid( (String) attributeValue );
-			
-			// objectClass
-			//delete.setObjectClasses( em.getObjectClass() );
-			
-		} catch ( IllegalArgumentException e ) {
-			logger.error("generateDeleteString is not ok :(", e);
-		} catch ( IllegalAccessException e ) {
-			logger.error("generateDeleteString is not ok :(", e);
-		}
-		
-		return operation.toStatementString();
+	@Override
+	public void persist(Object ldapEntity ) {
+		// validate ldap entity object
+
+		//
+		Map<Class, EntityMapping> ems = config.getEntityMappings();
+		EntityMapping em = ems.get( ldapEntity.getClass() );
+
+		String insertSql = this.sqlGen.generateInsertString( em, ldapEntity );
+
+		logger.info( "generating insert string: " + insertSql );
+		this.executeUpdateSql( insertSql );
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see jldap.session.component.persister.EntityPersister#generateUpdateString(java.lang.Object)
+	 * @see shiva.session.persister.EntityPersister#delete(java.lang.Object)
 	 */
-	public String generateUpdateString(EntityMapping em, Object ldapEntity) {
+	@Override
+	public void delete(Object ldapEntity ) {
+		//
+		Map<Class, EntityMapping> ems = config.getEntityMappings();
+		EntityMapping em = ems.get( ldapEntity.getClass() );
 
-		Operation operation = new Update();
+		String deleteSql = this.sqlGen.generateDeleteString( em, ldapEntity );
 
-		// directoryName
-		String directoryNameBound = em.getDirectoryNameBound();
-		operation.setDirectoryName( directoryNameBound );
+		logger.info( "generating delete string: " + deleteSql );
+		this.executeUpdateSql( deleteSql );
+	}
 
-		// objectClass
-		operation.setObjectClasses( em.getObjectClass() );		
-		
-		// attributes
-		Map<String, Object> columns = new SequencedHashMap();
-		
-		Map<Field, AttributeMapping> ams = em.getAttributesMapped();
-		Set<Field> keySet = ams.keySet();
-				
-		for (Field field : keySet) {
-			AttributeMapping am = ams.get( field );
-			
-			try {
-				
-				//
-				am.getAttribute().setAccessible( true );
-				
-				String attributeNameBound = am.getAttributeNameBound();
-				Object attributeValue = am.getAttribute().get( ldapEntity );
-				
-				if(am.isUidAttribute()){
-					operation.setUid( ((String) attributeValue) + "," + directoryNameBound );
-				}else{
-					columns.put(attributeNameBound, attributeValue );
-				}
-				
-			} catch (IllegalArgumentException e) {
-				logger.error("generateInsertString is not ok :(", e);
-			} catch (IllegalAccessException e) {
-				logger.error("generateInsertString is not ok :(", e);
-			}
+	/*
+	 * (non-Javadoc)
+	 * @see shiva.session.persister.EntityPersister#update(java.lang.Object)
+	 */
+	@Override
+	public void update(Object ldapEntity ) {
+		// validate ldap entity object
+
+		//
+		Map<Class, EntityMapping> ems = config.getEntityMappings();
+		EntityMapping em = ems.get( ldapEntity.getClass() );
+
+		String updateSql = this.sqlGen.generateUpdateString( em, ldapEntity );
+
+		logger.info( "generating update string: " + updateSql );
+		this.executeUpdateSql( updateSql );
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 */
+	private void executeUpdateSql( String sql ) {
+		try {
+			ConnectionFactory factory = new ConnectionFactory();
+			Connection conn = factory.getConnection( this.config );
+
+			PreparedStatement ps = conn.prepareStatement( sql );
+			ps.executeUpdate();
+
+		} catch ( SQLException e ) {
+			logger.error( "executeUpdateSql is not ok :(", e );
 		}
-		
-		operation.setColumns(columns);
-		return operation.toStatementString();
+	}
+
+	/**
+	 * 
+	 * @param sql
+	 * @return
+	 */
+	private ResultSet executeQuerySql( String sql ) {
+		ResultSet rs = null;
+
+		try {
+			ConnectionFactory factory = new ConnectionFactory();
+			Connection conn = factory.getConnection( config );
+
+			PreparedStatement ps = conn.prepareStatement( sql );
+			rs = ps.executeQuery();
+
+		} catch ( SQLException e ) {
+			logger.error( "executeQuerySql is not ok :(", e );
+		}
+
+		return rs;
 	}
 		
 }

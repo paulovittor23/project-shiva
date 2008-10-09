@@ -1,7 +1,5 @@
 package shiva.session.persister;
 
-import shiva.domain.metadata.EntityMapping;
-
 /**
  * 
  * @author Paulo Vitor
@@ -14,26 +12,23 @@ public interface EntityPersister {
 	
 	/**
 	 * 
-	 * @param em
+	 * 
 	 * @param ldapEntity
-	 * @return
 	 */
-	public String generateInsertString(EntityMapping em, Object ldapEntity);
+	public void persist( Object ldapEntity );
 	
 	/**
 	 * 
-	 * @param em
+	 * 
 	 * @param ldapEntity
-	 * @return
 	 */
-	public String generateDeleteString(EntityMapping em, Object ldapEntity);
+	public void update( Object ldapEntity );
 	
 	/**
 	 * 
-	 * @param em
+	 * 
 	 * @param ldapEntity
-	 * @return
 	 */
-	public String generateUpdateString(EntityMapping em, Object ldapEntity);
-
+	public void delete( Object ldapEntity );
+	
 }
