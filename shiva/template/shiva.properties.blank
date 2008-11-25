@@ -1,0 +1,17 @@
+# JLDAP-ANNOTATIONS CONFIGURATIONS FILE
+#
+# PROPERTIES DESCRIPTION:
+#
+# ldap.server.host 		= [LDAP SERVER IP or HOSTNAME]
+# ldap.server.port 		= [LDAP SERVER PORT] 
+# ldap.server.base.dn 	= [LDAP SERVER BASE DN]
+# ldap.server.username 	= [ADMINISTRATOR USERNAME]
+# ldap.server.password 	= [ADMINISTRATOR PASSWORD]
+#
+# USE SAMPLE:
+#
+# ldap.server.host 		= 192.168.130.51
+# ldap.server.port 		= 389 
+# ldap.server.base.dn 	= DC=company,DC=com
+# ldap.server.username 	= CN=manager,CN=users,DC=company,DC=com 
+# ldap.server.password 	= manager123 
